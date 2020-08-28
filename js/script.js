@@ -13,16 +13,26 @@ function genNumeri(max) {
   return Math.floor(Math.random() * 100) + 1;
 }
 //funzione che il numero non è duplicato
-function duplicatoCheck(numero, [numero]) {
+function duplicatoCheck(array) {
   var duplicate = false;
-  for (var i = 0; i < array.length; i++) {
-    for (var j = i+1; j < array.length; j++) {
-      if (j!=i && number[j] == number[i]) {
-        var duplicate = true;
+  for (var i = 0; i < array.length; i++)
+    {
+      for (var i = 0; i < array.length; i++)
+      {
+        for (var j = 0; j < array.length; j++)
+        {
+          if (i != j)
+          {
+            if (array[i] == array[j])
+            {
+              return false; // means there are duplicate values
+              }
+             }
+          }
       }
-    }
-  }
+      return  true; // means there are no duplicate values.
 
+}
 }
 
 // creo una variabile array con i numeri di gen16
@@ -30,6 +40,10 @@ var bombe = [];
 
 
 // ciclo che chiama la mia funzione di generazione dei numeri 16 volte
+for (var i = 0; i < 16; i++) {
+  var numeriGenerati = genNumeri()
+  duplicatoCheck(numeriGenerati)
+}
       // mi chiamo il check della funzione duplicati
       // se non è duplicato lo salvo nell'array bombe
 
