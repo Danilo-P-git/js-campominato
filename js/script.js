@@ -8,11 +8,9 @@
 
 
 // funzione che genera tra 1 e 100
-function genNumeri() {
+function genNumeri(max) {
 
-  var gen16 = Math.floor(Math.random() * 5) + 1;
-
-  return gen16
+  return Math.floor(Math.random() * 5) + 1;
 }
 //funzione che il numero non è duplicato
 function duplicatoCheck(numero) {
