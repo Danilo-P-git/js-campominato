@@ -6,46 +6,44 @@
 // La partita termina quando il giocatore inserisce un numero generato o il numero massimo di numeri consentiti
 // al termine della partita il software deve comunicare il punteggio cioè il numero di volte che l'utente ha inserito un numero consentito
 
-
 // funzione che genera tra 1 e 100
+
 function genNumeri(max) {
 
-  return Math.floor(Math.random() * 100) + 1;
+  return Math.floor(Math.random() * max) + 1
 }
 //funzione che il numero non è duplicato
-function duplicatoCheck(array) {
-  var duplicate = false;
-  for (var i = 0; i < array.length; i++)
-    {
-      for (var i = 0; i < array.length; i++)
-      {
-        for (var j = 0; j < array.length; j++)
-        {
-          if (i != j)
-          {
-            if (array[i] == array[j])
-            {
-              return false; // means there are duplicate values
-              }
-             }
-          }
-      }
-      return  true; // means there are no duplicate values.
+function duplicatoCheck(elementoDaVerificare, array) {
+  var checkDoppio = false;
+  for (var i = 0; i < array.length; i++) {
+    if (elementoDaVerificare === array[i]) {
+        var checkDoppio = true
+    }
 
+  }
 }
-}
+// FINE FUNZIONI
 
-// creo una variabile array con i numeri di gen16
-var bombe = [];
+
+
+// creo una variabile array con i numeri di genNUmeri
+var arrayBombe = []
 
 
 // ciclo che chiama la mia funzione di generazione dei numeri 16 volte
-for (var i = 0; i < 16; i++) {
-  var numeriGenerati = genNumeri()
-  duplicatoCheck(numeriGenerati)
+while (arrayBombe.lenght <= 16) {
+  var numeroGenerato = genNumeri(50);
+  console.log(numeroGenerato);
+  // mi chiamo il check della funzione duplicati       // se non è duplicato lo salvo nell'array bombe
+  if (duplicatoCheck(numeroGenerato, arrayBombe) === false) {
+     arrayBombe.push(numeroGenerato);
+  }
+
 }
-      // mi chiamo il check della funzione duplicati
-      // se non è duplicato lo salvo nell'array bombe
+
+
+console.log(arrayBombe);
+
 
 
 // creo una variabile array che contiene i numeri utente
