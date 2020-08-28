@@ -9,10 +9,10 @@
 
 // funzione che genera tra 1 e 100
 function genNumeri() {
-  for (var i = 0; i < 16; i++) {
-    var gen16 = Math.floor(Math.random() * 5) + 1;
-  }
-  return
+
+  var gen16 = Math.floor(Math.random() * 5) + 1;
+
+  return gen16
 }
 //funzione che il numero non è duplicato
 function duplicatoCheck(numero) {
