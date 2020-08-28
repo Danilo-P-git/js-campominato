@@ -10,13 +10,19 @@
 // funzione che genera tra 1 e 100
 function genNumeri(max) {
 
-  return Math.floor(Math.random() * 5) + 1;
+  return Math.floor(Math.random() * 100) + 1;
 }
 //funzione che il numero non è duplicato
-function duplicatoCheck(numero) {
-  if (numero == numero) {
-
+function duplicatoCheck(numero, [numero]) {
+  var duplicate = false;
+  for (var i = 0; i < array.length; i++) {
+    for (var j = i+1; j < array.length; j++) {
+      if (j!=i && number[j] == number[i]) {
+        var duplicate = true;
+      }
+    }
   }
+
 }
 
 // creo una variabile array con i numeri di gen16
