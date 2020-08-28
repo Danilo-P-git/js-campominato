@@ -8,10 +8,13 @@
 
 // funzione che genera tra 1 e 100
 
-function genNumeri(max) {
+function genNumeri(num) {
 
-  return Math.floor(Math.random() * max) + 1
+  return Math.floor(Math.random() * num) + 1
 }
+
+
+
 //funzione che il numero non è duplicato
 function duplicatoCheck(elementoDaVerificare, array) {
   var checkDoppio = false;
@@ -27,12 +30,12 @@ function duplicatoCheck(elementoDaVerificare, array) {
 
 
 // creo una variabile array con i numeri di genNUmeri
-var arrayBombe = []
-
+var arrayBombe = [];
+var x = 0;
 
 // ciclo che chiama la mia funzione di generazione dei numeri 16 volte
-while (arrayBombe.lenght <= 16) {
-  var numeroGenerato = genNumeri(50);
+while (x == 16) {
+  var numeroGenerato = genNumeri(100);
   console.log(numeroGenerato);
   // mi chiamo il check della funzione duplicati       // se non è duplicato lo salvo nell'array bombe
   if (duplicatoCheck(numeroGenerato, arrayBombe) === false) {
