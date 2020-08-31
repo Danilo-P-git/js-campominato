@@ -1,18 +1,17 @@
-
-// FINE FUNZIONI
+// INIZIO FUNZIONI
 function genNumeri(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 // funzione che il numero non è duplicato
 
-function duplicatoCheck(numero, array) {
- if (array.indexOf(numero) >= 0) {
- return true
- }
- else {
-  return false
-}
+function duplicatoCheck(array, numero) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] == numero) {
+        return true;
+    }
+  }
+  return false;
 }
 function rangeNumero (numero, min, max) {
 if (numero >= min && numero <= max) {
@@ -21,25 +20,40 @@ if (numero >= min && numero <= max) {
   return false;
 }
 }
+// FINE FUNZIONI
+
+
+
 
 var bombe = 16;
-var tentativi = 100;
-
-
+var tentativi;
+// Faccio scegliere la difficoltà all'utente
+var difficoltà = prompt("seleziona la difficoltà tra 1-2-3")
+if (difficoltà = 1) {
+ tentativi = 100;
+}
+else if (difficoltà = 2) {
+  tentativi = 80;
+}
+else if (difficoltà = 3) {
+  tentativi = 40;
+}
 
 // creo una variabile array con i numeri di genNUmeri
 var arrayBombe = [];
 
 // ciclo che chiama la mia funzione di generazione dei numeri 16 volte
-for (var i = 0; i < bombe; i++) {
   var numeroGenerato;
   do {
     numeroGenerato = genNumeri(1, tentativi);
+    if (duplicatoCheck(arrayBombe, numeroGenerato) === false) {
+      arrayBombe.push(numeroGenerato);
+
+    }
+
+  } while (arrayBombe.length < 16);
 
 
-  } while (duplicatoCheck(numeroGenerato, arrayBombe) === true);
-    arrayBombe.push(numeroGenerato);
-}
 console.log(arrayBombe);
 
 // creo una variabile array che contiene i numeri utente
@@ -47,60 +61,35 @@ var numeriUtente = [];
 // variabile booleana haPerso = false
 var haPerso = false;
 
-var ultimoCiclo = false;
-var i = 0;
-// ciclo di 84 volte
-while (i < tentativi - bombe && haPerso == false && ultimoCiclo == false) {
-  do {
-    var vaiCiclo = false;
-    var numeroInseritoUtente = parseInt(prompt("inserisci un numero tra 1 e 100 ed evita la bomba"));
-    if (isNaN(numeroInseritoUtente)) {
-      alert ("Inserisci un numero non una parola");
-      vaiCiclo = true;
-    }
-     else if (rangeNumero(numeroInseritoUtente, 1 , tentativi)) {
-       // check che il numero non sia duplicato nell'1array utente
-
-      if (duplicatoCheck(numeroInseritoUtente, numeriUtente)) {
-        alert ("Hai gia inserito questo numero");
-        vaiCiclor = true;
-      }
-      else {
-        vaiCiclo = false;
-      }
-
-    }
-     else {
-      alert ("Devi inserire un numero compreso tra 1 e 100");
-      vaiCiclo = true;
-    }
-  } while (vaiCiclo == true) {
-    if (duplicatoCheck(numeroInseritoUtente, arrayBombe)) {
-      haPerso = true;
-      alert ("hai perso hai beccato una bomba il livello che hai raggiunto è il: " + numeriUtente.length)
-    } else {
-      numeriUtente.push(numeroInseritoUtente);
-      console.log(numeriUtente);
-      if (i == tentativi - bombe - 1) {
-        ultimoCiclo = true;
-      }
-    }
-    i++;
+// chiedo all'utente di inserire il numero un numero pari ai tentativi e faccio il ciclo
+while (numeriUtente.length < tentativi - bombe && haPerso == false) {
+  // dichiaro una variabile con il numero inserito dall'utente
+  var numeroInseritoUtente = parseInt(prompt("inserisci un numero tra 1 e 100"));
+  // controllo se il numero inserito è tra 1 e 100
+  if (isNaN(numeroInseritoUtente) || rangeNumero(numeroInseritoUtente, 1 , 100) == false) {
+    alert("Devi inserire un NUMERO tra 1 e 100")
   }
+  // faccio un check che l'utente non inserisca sempre lo stesso numero e comunico all'utente che non può farlo
+  else if (duplicatoCheck(numeriUtente, numeroInseritoUtente) === true) {
+    alert("non inserire gli stessi numeri è barare")
+  }
+  // controllo che non sia duplicato
+  else if (duplicatoCheck(numeriUtente, numeroInseritoUtente) === false) {
+    // controllo se il numero inserito è nella lista dei numeri delle bombe
+    if (duplicatoCheck(arrayBombe, numeroInseritoUtente) === true) {
+      haPerso = true;
+    }
+    // se non lo è lo pusho e lo aggiungo all'array dell'utente
+     else {
+      numeriUtente.push(numeroInseritoUtente);
+    }
+  }
+  console.log(numeriUtente);
 }
 
-  if (haPerso == false) {
-    alert ("hai vinto")
-  }
-
-
-  // se non è duplicato salvo il numero nell'array utente
-  // check che il numero non sia nell'array bomba
-  // se il numero è nell'array bomba - allert hai perso ed esco dal ciclo
-    // allert con arrayUtente.lenght --> numero di volte che l'utente ha inserito un numero corretto
-    // haPerso = true
-    // esco dal ciclo
-
-// controllo se haPerso è false
-  // aller hai vinto
-  // allert con arrayUtente.lenght --> numero di volte che l'utente ha inserito un numero corretto
+if (haPerso == true) {
+  alert("Hai preso una bomba hai raggiunto il livello " + numeriUtente.length)
+}
+else {
+  alert("Congratulazioni hai vinto")
+}
